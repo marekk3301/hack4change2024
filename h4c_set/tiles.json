@@ -1,61 +1,103 @@
 [
 {
-    "game": "hack4bingo"
+    "game": "Hack4Bingo"
 },
 {
     "id": "blahaj",
     "name": "Blahaj",
-    "tip": "Rekin z IKEI",
+    "tip": "Pluszowy rekin z IKEI, marzenie każdego hackathonowca",
     "picture": "blahaj.jpeg"
 },
 
 {
     "id": "pizza",
     "name": "Karton po pizzy",
-    "tip": "",
+    "tip": "Kartonowe pudełko po pizzy, nie musi mieć zawartości. Jest sznasa, że wyewoluowało w statek pirata",
     "picture": "pizza.png"
 },
 {
     "id": "guma",
     "name": "Guma do żucia",
-    "tip": "",
+    "tip": "Miętowa czy truskawkowa - nie każda guma musi być wyżuta",
     "picture": "guma.jpeg"
 },
 {
     "id": "kaczka",
     "name": "Żółta kaczuszka",
-    "tip": "",
+    "tip": "Niezastąpiony atrybut każdego programisty, może być gumowa, nadrukowana lub przyklejana",
     "picture": "kaczka.jpeg"
 },
 
 {
     "id": "koszulka_h4c",
-    "name": "Koszulka hack4change",
-    "tip": "",
+    "name": "Koszulka Hack4Change",
+    "tip": "Jedyna w swoim rodzaju limitowana koszulka Hack4Change",
     "picture": "koszulka_h4c.jpeg"
 },
 {
     "id": "pjatk",
     "name": "Logo PJATK",
-    "tip": "",
+    "tip": "Znajdź logo najlepszej uczelni",
     "picture": "pjatk.png"
 },
 {
     "id": "jednorozec",
     "name": "Jednorożec",
-    "tip": "",
+    "tip": "Niektórzy powiadają, że jednorożce nie istnieją, ale my wiemy jaka jest prawda",
     "picture": "jednorozec.avif"
 },
 
 {
     "id": "rj45",
-    "name": "Kabel RJ45",
-    "tip": "Kabel do internetu",
+    "name": "Kabel z wtyczką RJ45",
+    "tip": "Czy ktoś nie może się połączyć z internetem? Odnajdź klasyczną formę dotępu do internetu",
     "picture": "rj45.jpeg"
 },
 {
     "id": "zakaz",
     "name": "Zakaz palenia",
-    "tip": "",
+    "tip": "Czy ja czuję tytoń? Na pewno nie w miejscu z zakazem palenia",
     "picture": "zakaz.jpeg"
+},
+{
+    "id": "zupka_chinska",
+    "name": "Zupka chińska",
+    "tip": "Pożywny posiłek zapewniający wartości odżywcze przez całe 48 godzin",
+    "picture": "zupka_instant.webp"
+},
+{
+    "id": "haslo_wifi",
+    "name": "Hasło do WIFI",
+    "tip": "Legendy powiadają, że kartka wisi na drzwiach, ale i tak wiadomo, że każdy musi się spytać",
+    "picture": "wifi.jpg"
+},
+{
+    "id": "prysznic",
+    "name": "Prysznic",
+    "tip": "Czy ktoś wie co to za ustrojstwo?",
+    "picture": "prysznic.jpg"
+},
+{
+    "id": "wyjscie_ewakuacyjne",
+    "name": "Znak: Wyjście ewakuacyjne",
+    "tip": "W razie sytuacji wyjątkowej warto wiedzieć w którą stronę powinniśmy się kierować",
+    "picture": "ewakuacja.png"
+},
+{
+    "id": "roslinka",
+    "name": "Roślinka",
+    "tip": "Podpowiedzilibyśmy, że znajduje się tutaj zamioculcas zamiifolia, ale to chyba nic nie pomoże",
+    "picture": "roslinka.jpg"
+},
+{
+    "id": "flaga_polski",
+    "name": "Flaga polski",
+    "tip": "Gdański Park Naukowo Technologiczny wywiesił co najmniej jedną flagę, jednak trzeba się przemóc i zaczerpnąć świeżego powietrza by ją znaleźć",
+    "picture": "flaga_polski.png"
+},
+{
+    "id": "zegar",
+    "name": "Zegar ścienny",
+    "tip": "To fajnie kiedy element wystroju przypomina nam o uciekającym czasie",
+    "picture": "zegar.jpg"
 }]
