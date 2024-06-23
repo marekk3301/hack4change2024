@@ -118,6 +118,15 @@ h2 {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 3;
+    flex-direction: column;
+    display: flex;
+    display: none;
+}
+
+.modal_background.active {
+    display: block;
+    flex-direction: column;
+    display: flex;
 }
 
 .modal {
@@ -130,7 +139,6 @@ h2 {
     border-radius: 24px;
     align-items: center;
     text-align: center;
-    flex-direction: column;
 }
 
 .modal img {
@@ -154,4 +162,5 @@ h2 {
     border-radius: 50%;
     border: inherit;
     text-align: center;
+    align-self: center;
 }

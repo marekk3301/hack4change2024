@@ -19,7 +19,7 @@
 
 <button id="startButton" class="button_primary" onclick="startGame(3)">Start</button>
 
-<div class="modal_background">
+<div id="modal" class="modal_background">
     <div class="modal">
         <h1>Kaczuszka</h1>
         <img src="h4c_set/kaczka.jpeg">
@@ -100,13 +100,18 @@
         }, 1000);
     }
 
+    document.querySelector('.modal_close_button').addEventListener('click', function() {
+        document.getElementById('modal').classList.remove('active');
+    });
+
     function createGrid(size) {
         let tiles = [];
 
         const container = document.getElementById('grid-container');
         const containerWidth = container.offsetWidth;
         const elementWidth = (containerWidth - ((size - 1) * 10)) / size;
-        
+        const modal = document.getElementById('modal'); // Get the modal by its ID
+
         container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
         container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
         
@@ -117,6 +122,10 @@
                 gridItem.style.height = `${elementWidth}px`; // Correctly set the height
                 gridItem.style.backgroundImage = "url(hidden.jpeg)";
 
+                gridItem.addEventListener('click', function() {
+                modal.dataset.gridItemId = gridItem.dataset.id; // Set a property on the modal
+                modal.classList.add('active'); // Show the modal
+                });
                 container.appendChild(gridItem);
                 tiles.push(gridItem);
             }
