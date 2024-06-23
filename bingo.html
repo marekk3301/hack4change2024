@@ -14,15 +14,20 @@
 
 <h1 id="game_name"></h1>
 <h2 id="game_time"></h2>
-<button id="startButton" onclick="startGame(3)">Start</button>
 
 <div class="grid-container" id="grid-container"></div>
+
+<button id="startButton" class="button_primary" onclick="startGame(3)">Start</button>
 
 <script>
     const gameSet = "h4c_set";
     const gridSize = 3;
     const gameTime = 15*60;
-    var tileData;
+    let tileElements;
+    let tileData;
+    let interval;
+    
+    const timeElement = document.getElementById("game_time");
 
     fetch(`${gameSet}/tiles.json`)
         .then(response => response.json())
@@ -32,16 +37,17 @@
 
             let nameElement = document.getElementById("game_name");
             nameElement.textContent = gameData[0]["game"];
-            let timeElement = document.getElementById("game_time");
             timeElement.textContent = `${gameTime / 60}:00`;
 
-            // startGame(tileData, gridSize);
+            tileElements = createGrid(gridSize);
         })
         .catch(error => console.error('Error fetching JSON data:', error));
 
     function startGame(size) {
-
-        document.getElementById("startButton").style.display = "none";
+        const buttonElement = document.getElementById("startButton");
+        buttonElement.classList.remove("button_primary");
+        buttonElement.classList.add("button_secondary");
+        buttonElement.textContent = "Opuść pokój";
 
         // Helper function to shuffle an array
         function shuffleArray(array) {
@@ -58,13 +64,31 @@
         // Select the first n unique objects
         const uniqueObjects = shuffledData.slice(0, size*size);
 
-        createGrid(uniqueObjects, size);
+        populateGrid(tileElements, uniqueObjects, size);
+        startCountdown(gameTime, timeElement)
     }
 
-    function createGrid(tileset, size) {
-        let gameFinished = false;
+    function startCountdown(duration, display) {
+        let timer = duration, minutes, seconds;
+        interval = setInterval(() => {
+            minutes = Math.floor(timer / 60);
+            seconds = timer % 60;
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(interval);
+                display.textContent = "Koniec czasu!";
+            }
+        }, 1000);
+    }
+
+    function createGrid(size) {
         let tiles = [];
-        
+
         const container = document.getElementById('grid-container');
         const containerWidth = container.offsetWidth;
         const elementWidth = (containerWidth - ((size - 1) * 10)) / size;
@@ -72,12 +96,32 @@
         container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
         container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
         
-        let id_val = 0; 
+        for (let y = 0; y < size; y++) {
+            for (let x = 0; x < size; x++) {
+                const gridItem = document.createElement('button');
+                gridItem.classList.add('grid-item');
+                gridItem.style.height = `${elementWidth}px`; // Correctly set the height
+                gridItem.style.backgroundImage = "url(hidden.jpeg)";
 
+                container.appendChild(gridItem);
+                tiles.push(gridItem);
+            }
+        }
+        
+        return tiles;
+    }
+    
+    function populateGrid(tileset, data, size) {
+        let gameFinished = false;    
+        
         function changeColor(event) {
             event.target.dataset.checked = "checked";
             event.target.style.border = "7px solid #4ED6B0";
             if  (checkWin() && !gameFinished) { 
+                clearInterval(interval);
+                timeElement.style.color = "#F9AF7C";
+                timeVal = timeElement.textContent;
+                timeElement.textContent = "Twój czas: " + timeVal;
                 alert("yooooooooo");
                 gameFinished = true;
             }
@@ -91,7 +135,7 @@
 
             // Check rows
             for (let i = 0; i < size; i++) {
-                let row = tiles.slice(i * size, i * size + size);
+                let row = tileset.slice(i * size, i * size + size);
                 if (allMarked(row)) return true;
             }
 
@@ -99,7 +143,7 @@
             for (let i = 0; i < size; i++) {
                 let column = [];
                 for (let j = 0; j < size; j++) {
-                    column.push(tiles[i + j * size]);
+                    column.push(tileset[i + j * size]);
                 }
                 if (allMarked(column)) return true;
             }
@@ -108,31 +152,26 @@
             let diagonal1 = [];
             let diagonal2 = [];
             for (let i = 0; i < size; i++) {
-                diagonal1.push(tiles[i * (size + 1)]);
-                diagonal2.push(tiles[(i + 1) * (size - 1)]);
+                diagonal1.push(tileset[i * (size + 1)]);
+                diagonal2.push(tileset[(i + 1) * (size - 1)]);
             }
             if (allMarked(diagonal1) || allMarked(diagonal2)) return true;
 
             // No bingo found
             return false;
         }
-
-        for (let y = 0; y < size; y++) {
-            for (let x = 0; x < size; x++) {
-                const gridItem = document.createElement('button');
-
-                gridItem.classList.add('grid-item');
-                gridItem.setAttribute("data-checked", "unchecked");
-                gridItem.style.height = `${elementWidth}px`; // Correctly set the height
-                gridItem.id = tileset[id_val].id;
-                gridItem.style.backgroundImage = `url(${gameSet}/${tileset[id_val].picture})`;
-                gridItem.onclick = changeColor;
-                container.appendChild(gridItem);
-                tiles.push(gridItem);
-
-                id_val++;
-            }
+        
+        for (let i=0; i < tileset.length; i++) {
+            let gridItem = tileset[i];
+            gridItem.setAttribute("data-checked", "unchecked");
+            gridItem.id = data[i].id;
+            gridItem.style.backgroundImage = `url(${gameSet}/${data[i].picture})`;
+            gridItem.onclick = changeColor;
+            
+            console.log(gridItem);
+            console.log(data[i]);
         }
+        
     }
 </script>
 
