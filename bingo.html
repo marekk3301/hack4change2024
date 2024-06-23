@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spacerowe Bingo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+    <a href="index.html"><img src="logo.svg" alt="logo"></a>
+</div>
+
+<h1 id="game_name"></h1>
+<h2 id="game_time"></h2>
+<button id="startButton" onclick="startGame(3)">Start</button>
+
+<div class="grid-container" id="grid-container"></div>
+
+<script>
+    const gameSet = "h4c_set";
+    const gridSize = 3;
+    const gameTime = 15*60;
+    var tileData;
+
+    fetch(`${gameSet}/tiles.json`)
+        .then(response => response.json())
+        .then(data => {
+            const gameData = data;
+            tileData = gameData.slice(1); // the first element is metadata
+
+            let nameElement = document.getElementById("game_name");
+            nameElement.textContent = gameData[0]["game"];
+            let timeElement = document.getElementById("game_time");
+            timeElement.textContent = `${gameTime / 60}:00`;
+
+            // startGame(tileData, gridSize);
+        })
+        .catch(error => console.error('Error fetching JSON data:', error));
+
+    function startGame(size) {
+
+        document.getElementById("startButton").style.display = "none";
+
+        // Helper function to shuffle an array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Shuffle the parsed data to ensure randomness
+        const shuffledData = shuffleArray(tileData);
+
+        // Select the first n unique objects
+        const uniqueObjects = shuffledData.slice(0, size*size);
+
+        createGrid(uniqueObjects, size);
+    }
+
+    function createGrid(tileset, size) {
+        let gameFinished = false;
+        let tiles = [];
+        
+        const container = document.getElementById('grid-container');
+        const containerWidth = container.offsetWidth;
+        const elementWidth = (containerWidth - ((size - 1) * 10)) / size;
+        
+        container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+        container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+        
+        let id_val = 0; 
+
+        function changeColor(event) {
+            event.target.dataset.checked = "checked";
+            event.target.style.border = "7px solid #4ED6B0";
+            if  (checkWin() && !gameFinished) { 
+                alert("yooooooooo");
+                gameFinished = true;
+            }
+        }
+
+        function checkWin() {
+            // Helper function to check if all elements in an array are "checked"
+            function allMarked(arr) {
+                return arr.every(obj => obj.dataset.checked === "checked");
+            }
+
+            // Check rows
+            for (let i = 0; i < size; i++) {
+                let row = tiles.slice(i * size, i * size + size);
+                if (allMarked(row)) return true;
+            }
+
+            // Check columns
+            for (let i = 0; i < size; i++) {
+                let column = [];
+                for (let j = 0; j < size; j++) {
+                    column.push(tiles[i + j * size]);
+                }
+                if (allMarked(column)) return true;
+            }
+
+            // Check diagonals
+            let diagonal1 = [];
+            let diagonal2 = [];
+            for (let i = 0; i < size; i++) {
+                diagonal1.push(tiles[i * (size + 1)]);
+                diagonal2.push(tiles[(i + 1) * (size - 1)]);
+            }
+            if (allMarked(diagonal1) || allMarked(diagonal2)) return true;
+
+            // No bingo found
+            return false;
+        }
+
+        for (let y = 0; y < size; y++) {
+            for (let x = 0; x < size; x++) {
+                const gridItem = document.createElement('button');
+
+                gridItem.classList.add('grid-item');
+                gridItem.setAttribute("data-checked", "unchecked");
+                gridItem.style.height = `${elementWidth}px`; // Correctly set the height
+                gridItem.id = tileset[id_val].id;
+                gridItem.style.backgroundImage = `url(${gameSet}/${tileset[id_val].picture})`;
+                gridItem.onclick = changeColor;
+                container.appendChild(gridItem);
+                tiles.push(gridItem);
+
+                id_val++;
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

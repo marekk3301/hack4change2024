@@ -1,0 +1,61 @@
+[
+{
+    "game": "hack4bingo"
+},
+{
+    "id": "blahaj",
+    "name": "Blahaj",
+    "tip": "Rekin z IKEI",
+    "picture": "blahaj.jpeg"
+},
+
+{
+    "id": "pizza",
+    "name": "Karton po pizzy",
+    "tip": "",
+    "picture": "pizza.png"
+},
+{
+    "id": "guma",
+    "name": "Guma do żucia",
+    "tip": "",
+    "picture": "guma.jpeg"
+},
+{
+    "id": "kaczka",
+    "name": "Żółta kaczuszka",
+    "tip": "",
+    "picture": "kaczka.jpeg"
+},
+
+{
+    "id": "koszulka_h4c",
+    "name": "Koszulka hack4change",
+    "tip": "",
+    "picture": "koszulka_h4c.jpeg"
+},
+{
+    "id": "pjatk",
+    "name": "Logo PJATK",
+    "tip": "",
+    "picture": "pjatk.png"
+},
+{
+    "id": "jednorozec",
+    "name": "Jednorożec",
+    "tip": "",
+    "picture": "jednorozec.avif"
+},
+
+{
+    "id": "rj45",
+    "name": "Kabel RJ45",
+    "tip": "Kabel do internetu",
+    "picture": "rj45.jpeg"
+},
+{
+    "id": "zakaz",
+    "name": "Zakaz palenia",
+    "tip": "",
+    "picture": "zakaz.jpeg"
+}]

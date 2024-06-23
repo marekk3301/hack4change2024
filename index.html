@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spacerowe Bingo</title>
+    <link rel="stylesheet" href="style.css"></link>
+    <script>
+        function checkDevice() {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const loginForm = document.querySelector('.login-form');
+            const desktopMessage = document.querySelector('.desktop-message');
+
+            if (isMobile) {
+                loginForm.style.display = 'block';
+                desktopMessage.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                desktopMessage.style.display = 'block';
+            }
+        }
+        window.onload = checkDevice;
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <a href="index.html"><img src="logo.svg" alt="logo"></a>
+</div>
+
+<div class="login-form">
+    <h1>hack4bingo</h1>
+    <form id="hashForm" method="GET" action="bingo.html">
+        <input type="text" id="username" name="username" placeholder="username" required>
+        <button type="submit">Join Game</button>
+    </form>
+</div>
+
+<div class="desktop-message">
+    <p>This game is only available on a mobile browser. Please use a mobile device to join the game.</p>
+</div>
+
+<!-- <script>
+    function hashCode(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = (hash << 5) - hash + str.charCodeAt(i);
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
+    }
+
+    function toSixDigitHash(value) {
+        const hash = Math.abs(hashCode(value));
+        return ('000000' + (hash % 1000000)).slice(-6);
+    }
+
+    document.getElementById('hashForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const inputValue = document.getElementById('username').value;
+        const hashValue = toSixDigitHash(inputValue);
+        const url = `bingo.html?hash=${hashValue}`;
+
+        // Send the GET request
+        window.location.href = url;
+    });
+</script> -->
+
+</body>
+</html>
