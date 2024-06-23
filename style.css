@@ -219,7 +219,7 @@ h2 {
 }
 
 .winner_winner_chicken_dinner > .bingo_container *:nth-child(5) {
-opacity: calc(var(--base-opacity) + var(--increment) * 4);
+    opacity: calc(var(--base-opacity) + var(--increment) * 4);
 }
 
 .winner_winner_chicken_dinner.active {
@@ -243,7 +243,6 @@ opacity: calc(var(--base-opacity) + var(--increment) * 4);
     transform: translateX(-50%);
     bottom: 75px;
     z-index: 5;
-    display: none;
 }
 
 .modal_close_button {
