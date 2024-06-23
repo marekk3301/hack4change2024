@@ -1,30 +1,30 @@
 [
 {
-    "game": "hack4bingo"
+    "game": "Hack4Bingo"
 },
 {
     "id": "blahaj",
     "name": "Blahaj",
-    "tip": "Rekin z IKEI",
+    "tip": "Pluszowy rekin z IKEI",
     "picture": "blahaj.jpeg"
 },
 
 {
     "id": "pizza",
     "name": "Karton po pizzy",
-    "tip": "",
+    "tip": "Kartonowe pudełko po pizzy, nie musi mieć zawartości",
     "picture": "pizza.png"
 },
 {
     "id": "guma",
     "name": "Guma do żucia",
-    "tip": "",
+    "tip": "Miętowa czy truskawkowa - nie każda guma musi być wyżuta",
     "picture": "guma.jpeg"
 },
 {
     "id": "kaczka",
     "name": "Żółta kaczuszka",
-    "tip": "",
+    "tip": "Nie",
     "picture": "kaczka.jpeg"
 },
 
