@@ -19,6 +19,19 @@
 
 <button id="startButton" class="button_primary" onclick="startGame(3)">Start</button>
 
+<div class="modal_background">
+    <div class="modal">
+        <h1>Kaczuszka</h1>
+        <img src="h4c_set/kaczka.jpeg">
+        <p>Niezastąpiony atrybut każdego programisty, może być gumowa, nadrukowana lub przyklejana</p>
+        <div class="buttons">
+            <button class="button_primary">Widzę</button>
+            <button class="button_secondary" class="modal_camera"><img src="icons/camera.png"></button>
+        </div>
+    </div>
+    <button></button>
+</div>
+
 <script>
     const gameSet = "h4c_set";
     const gridSize = 3;
@@ -48,6 +61,7 @@
         buttonElement.classList.remove("button_primary");
         buttonElement.classList.add("button_secondary");
         buttonElement.textContent = "Opuść pokój";
+        buttonElement.onclick = redirectHome;
 
         // Helper function to shuffle an array
         function shuffleArray(array) {
@@ -114,9 +128,10 @@
     function populateGrid(tileset, data, size) {
         let gameFinished = false;    
         
-        function changeColor(event) {
-            event.target.dataset.checked = "checked";
-            event.target.style.border = "7px solid #4ED6B0";
+        function openModal(event) {
+            gridItem = event.target;
+            gridItem.dataset.checked = "checked";
+            gridItem.style.border = "7px solid #4ED6B0";
             if  (checkWin() && !gameFinished) { 
                 clearInterval(interval);
                 timeElement.style.color = "#F9AF7C";
@@ -166,12 +181,18 @@
             gridItem.setAttribute("data-checked", "unchecked");
             gridItem.id = data[i].id;
             gridItem.style.backgroundImage = `url(${gameSet}/${data[i].picture})`;
-            gridItem.onclick = changeColor;
+            gridItem.setAttribute("data-name", data[i].name);
+            gridItem.setAttribute("data-tip", data[i].tip);
+            gridItem.setAttribute("data-picture", data[i].picture);
+            gridItem.onclick = openModal;
             
             console.log(gridItem);
             console.log(data[i]);
         }
-        
+    }
+
+    function redirectHome() {
+        window.location.href = "/index.html";
     }
 </script>
 

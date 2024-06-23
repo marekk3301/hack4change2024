@@ -108,3 +108,37 @@ h2 {
     /* color: white; */
     font-size: 16px;
 }
+
+
+.modal_background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 3;
+}
+
+.modal {
+    margin: 35px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #FCFFFE;
+    border-radius: 24px;
+    align-items: center;
+}
+
+.modal img {
+    max-width: 50%;
+}
+
+.modal .buttons {
+    display: flex;
+    width: 100%;
+}
+
+.modal_camera {
+    max-width: 50px;
+}
