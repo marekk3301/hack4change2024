@@ -21,9 +21,9 @@
 
 <div id="modal" class="modal_background">
     <div class="modal">
-        <h1>Kaczuszka</h1>
-        <img src="h4c_set/kaczka.jpeg">
-        <p>Niezastąpiony atrybut każdego programisty, może być gumowa, nadrukowana lub przyklejana</p>
+        <h1></h1>
+        <img src="">
+        <p></p>
         <div class="buttons">
             <button class="button_primary">Widzę</button>
             <button class="modal_camera"><img src="icons/camera.png"></button>
@@ -150,9 +150,13 @@
         const modal = document.getElementById('modal'); // Get the modal by its ID
         
         function openModal(event) {
-            gridItem = event.target;
+            let modalElement = event.target.parentElement.parentElement.parentElement;
+            gridItemID = modalElement.dataset.id_ref;
+            gridItem = document.getElementById(gridItemID);
+            console.log(gridItem);
             gridItem.dataset.checked = "checked";
             gridItem.style.border = "7px solid #4ED6B0";
+            modalElement.classList.remove('active');
             if  (checkWin() && !gameFinished) { 
                 clearInterval(interval);
                 timeElement.style.color = "#F9AF7C";
@@ -202,21 +206,18 @@
             gridItem.setAttribute("data-checked", "unchecked");
             gridItem.id = data[i].id;
             gridItem.style.backgroundImage = `url(${gameSet}/${data[i].picture})`;
-            gridItem.setAttribute("data-name", data[i].name);
-            gridItem.setAttribute("data-tip", data[i].tip);
-            gridItem.setAttribute("data-picture", data[i].picture);
-            gridItem.onclick = openModal;
-
+            // gridItem.setAttribute("data-name", data[i].name);
+            // gridItem.setAttribute("data-tip", data[i].tip);
+            // gridItem.setAttribute("data-picture", data[i].picture);
+            
             gridItem.addEventListener('click', function() {
-                modal.dataset.gridItemId = gridItem.dataset.id; // Set a property on the modal
+                modal.setAttribute("data-id_ref", data[i].id); 
                 modal.classList.add('active'); // Show the modal
                 modal.querySelector("h1").textContent = data[i].name;
                 modal.querySelector("img").src = `${gameSet}/${data[i].picture}`;
                 modal.querySelector("p").textContent = data[i].tip;
+                modal.querySelector(".modal .buttons .button_primary").onclick = openModal;
             });
-            
-            console.log(gridItem);
-            console.log(data[i]);
         }
     }
 
