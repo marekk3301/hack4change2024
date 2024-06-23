@@ -32,7 +32,7 @@
     <button class="modal_close_button">&#10006;</button>
 </div>
 
-<div class="winner_winner_chicken_dinner" style="display: none;">
+<div class="winner_winner_chicken_dinner" id="bingooo">
     <div class="bingo_container">
         <p>BINGO</p>
         <p>BINGO</p>
@@ -42,8 +42,8 @@
     </div>
     <img class="wiewiur" src="spacerowe_bingo_wiewiur.png">
     <div class="buttons">
-        <button class="button_secondary">Kontynuuj spacer</button>
-        <button class="button_tetriary">Zakończ spacer</button>
+        <button class="button_secondary" id ="continue">Kontynuuj spacer</button>
+        <button class="button_tetriary" id="back_to_home">Zakończ spacer</button>
     </div>
 </div>
 
@@ -162,7 +162,17 @@
                 timeElement.style.color = "#F9AF7C";
                 timeVal = timeElement.textContent;
                 timeElement.textContent = "Twój czas: " + timeVal;
-                alert("yooooooooo");
+                var bingo = document.getElementById('bingooo');
+                bingo.classList.add('active');
+                document.getElementById('continue').addEventListener('click', function() {
+                    bingo.classList.remove('active');
+                    startGame(3);
+                });
+                document.getElementById('back_to_home').addEventListener('click', function() {
+                    bingo.classList.remove('active');
+                    redirectHome();
+                });
+                
                 gameFinished = true;
             }
         }
@@ -220,9 +230,14 @@
             });
         }
     }
+    function hideBingoModal() {
+    var modal = document.getElementById('bingooo');
+    modal.classList.remove('show');
+    }
+
 
     function redirectHome() {
-        window.location.href = "/index.html";
+        window.location.href = "/hack4change2024/";
     }
 </script>
 

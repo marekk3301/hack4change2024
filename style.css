@@ -175,7 +175,6 @@ h2 {
 }
 
 .winner_winner_chicken_dinner {
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -186,6 +185,7 @@ h2 {
     height: 100vh;
     background-color: #4ED6B0;
     z-index: 3;
+    display:none;
 }
 
 
@@ -200,6 +200,7 @@ h2 {
     --base-opacity: 20%;
     --increment: 20%; /* Increment size */
 }
+
 
 .winner_winner_chicken_dinner > .bingo_container *:nth-child(1) {
     opacity: calc(var(--base-opacity) + var(--increment) * 0);
@@ -218,8 +219,14 @@ h2 {
 }
 
 .winner_winner_chicken_dinner > .bingo_container *:nth-child(5) {
-opacity: calc(var(--base-opacity) + var(--increment) * 4);
+    opacity: calc(var(--base-opacity) + var(--increment) * 4);
 }
+
+.winner_winner_chicken_dinner.active {
+    display: flex;
+    flex-direction: column;
+}
+
       
 .winner_winner_chicken_dinner .buttons {
     display: flex;
@@ -236,7 +243,6 @@ opacity: calc(var(--base-opacity) + var(--increment) * 4);
     transform: translateX(-50%);
     bottom: 75px;
     z-index: 5;
-    display: none;
 }
 
 .modal_close_button {
