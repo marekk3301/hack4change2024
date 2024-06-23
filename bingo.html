@@ -125,7 +125,6 @@
         const container = document.getElementById('grid-container');
         const containerWidth = container.offsetWidth;
         const elementWidth = (containerWidth - ((size - 1) * 10)) / size;
-        const modal = document.getElementById('modal'); // Get the modal by its ID
 
         container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
         container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
@@ -137,10 +136,6 @@
                 gridItem.style.height = `${elementWidth}px`; // Correctly set the height
                 gridItem.style.backgroundImage = "url(hidden.jpeg)";
 
-                gridItem.addEventListener('click', function() {
-                modal.dataset.gridItemId = gridItem.dataset.id; // Set a property on the modal
-                modal.classList.add('active'); // Show the modal
-                });
                 container.appendChild(gridItem);
                 tiles.push(gridItem);
             }
@@ -151,6 +146,8 @@
     
     function populateGrid(tileset, data, size) {
         let gameFinished = false;    
+
+        const modal = document.getElementById('modal'); // Get the modal by its ID
         
         function openModal(event) {
             gridItem = event.target;
@@ -209,6 +206,14 @@
             gridItem.setAttribute("data-tip", data[i].tip);
             gridItem.setAttribute("data-picture", data[i].picture);
             gridItem.onclick = openModal;
+
+            gridItem.addEventListener('click', function() {
+                modal.dataset.gridItemId = gridItem.dataset.id; // Set a property on the modal
+                modal.classList.add('active'); // Show the modal
+                modal.querySelector("h1").textContent = data[i].name;
+                modal.querySelector("img").src = `${gameSet}/${data[i].picture}`;
+                modal.querySelector("p").textContent = data[i].tip;
+            });
             
             console.log(gridItem);
             console.log(data[i]);
